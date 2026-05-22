@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shastika CocoBot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f0f9fb;
+      --ivory: rgba(240, 249, 251, 0.95);
+      --teal: #2d7a8a;
+      --teal-dark: #1f5b6b;
+      --green-accent: #5a9e7f;
+      --ink: #0f3a42;
+      --muted: #557a84;
+      --line: rgba(45, 122, 138, 0.15);
+      --shadow: 0 18px 50px rgba(31, 91, 107, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+      color: var(--ink);
+      font-family: "Inter", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(45, 122, 138, 0.4) 0 12%, transparent 30%),
+        radial-gradient(circle at 92% 28%, rgba(90, 158, 127, 0.35) 0 10%, transparent 28%),
+        radial-gradient(circle at 8% 88%, rgba(45, 122, 138, 0.38) 0 9%, transparent 27%),
+        linear-gradient(135deg, #2d8fa3 0%, #3d9bb5 25%, #4da8c2 50%, #5db5ce 75%, #6dc2db 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.34;
+    }
+
+    body::before {
+      width: 260px;
+      height: 380px;
+      left: -88px;
+      bottom: -70px;
+      background:
+        radial-gradient(ellipse at 64% 18%, rgba(77, 168, 194, 0.5) 0 9%, transparent 10%),
+        radial-gradient(ellipse at 46% 28%, rgba(90, 158, 127, 0.45) 0 8%, transparent 9%),
+        radial-gradient(ellipse at 68% 43%, rgba(77, 168, 194, 0.4) 0 8%, transparent 9%),
+        radial-gradient(ellipse at 43% 56%, rgba(45, 122, 138, 0.35) 0 8%, transparent 9%),
+        linear-gradient(65deg, transparent 48%, rgba(77, 168, 194, 0.45) 49% 51%, transparent 52%);
+      transform: rotate(-16deg);
+    }
+
+    body::after {
+      width: 270px;
+      height: 390px;
+      right: -90px;
+      top: 90px;
+      background:
+        radial-gradient(ellipse at 38% 18%, rgba(77, 168, 194, 0.4) 0 8%, transparent 9%),
+        radial-gradient(ellipse at 57% 30%, rgba(90, 158, 127, 0.35) 0 8%, transparent 9%),
+        radial-gradient(ellipse at 35% 44%, rgba(77, 168, 194, 0.3) 0 8%, transparent 9%),
+        radial-gradient(ellipse at 60% 57%, rgba(45, 122, 138, 0.28) 0 8%, transparent 9%),
+        linear-gradient(112deg, transparent 48%, rgba(77, 168, 194, 0.35) 49% 51%, transparent 52%);
+      transform: rotate(18deg);
+    }
+
+    .bot-shell {
+      width: min(880px, 100%);
+      padding: clamp(28px, 5vw, 58px);
+      text-align: center;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 18px;
+      box-shadow: 0 25px 70px rgba(45, 122, 138, 0.25);
+    }
+
+    .bot-mark {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f9fb 100%);
+      border: 2px solid var(--teal);
+      border-radius: 50%;
+      box-shadow: 0 10px 28px rgba(45, 122, 138, 0.15);
+    }
+
+    .bot-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Playfair Display", "Cinzel", serif;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h1 span {
+      color: var(--teal);
+      font-style: italic;
+    }
+
+    .subtitle {
+      margin: 18px auto 30px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.16rem);
+      line-height: 1.7;
+    }
+
+    .language-grid {
+      width: min(650px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .language-grid button {
+      min-height: 54px;
+      padding: 13px 18px;
+      color: var(--teal-dark);
+      background: rgba(240, 249, 251, 0.9);
+      border: 2px solid var(--teal);
+      border-radius: 999px;
+      box-shadow: 0 8px 22px rgba(45, 122, 138, 0.1);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .language-grid button:hover {
+      color: #fff;
+      background: linear-gradient(135deg, var(--teal), var(--green-accent));
+      border-color: var(--green-accent);
+      transform: translateY(-2px);
+    }
+
+    .language-grid button:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: min(310px, 100%);
+    }
+
+    .bot-note {
+      margin: 26px auto 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 620px) {
+      .language-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .language-grid button:last-child:nth-child(odd) {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bot-shell">
+    <div class="bot-mark">
+      <img src="{{ url_for('static', filename='images/logo.webp') }}" alt="Shastika Global">
+    </div>
+    <h1>Shastika's <span>CocoBot</span></h1>
+    <p class="subtitle">Select Language / अपनी भाषा चुनें</p>
+
+    <div class="language-grid">
+      <button type="button">English</button>
+      <button type="button">Hindi (हिंदी)</button>
+      <button type="button">Tamil (தமிழ்)</button>
+      <button type="button">Kannada (ಕನ್ನಡ)</button>
+      <button type="button">Japanese (日本語)</button>
+      <button type="button">Arabic (العربية)</button>
+      <button type="button">Malay (Bahasa Melayu)</button>
+      <button type="button">Korean (한국어)</button>
+      <button type="button">Chinese (中文)</button>
+      <button type="button">Urdu (اردو)</button>
+      <button type="button">French (Français)</button>
+    </div>
+
+    <p class="bot-note">Choose a language to start your product enquiry.</p>
+  </main>
+</body>
+</html>

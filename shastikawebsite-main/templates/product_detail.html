@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="product-detail-page">
+  <section class="product-detail-hero">
+    <div class="product-visual-column">
+      <a href="/" class="product-back-btn"
+        style="position: fixed; top: 130px; left: clamp(20px, 4vw, 40px); z-index: 50; text-transform: uppercase; font-family: 'Cinzel', serif; letter-spacing: 1px; margin: 0;">←
+        BACK TO HOME</a>
+      <div class="product-oval-stage">
+        <img src="{{ url_for('static', filename='images/' ~ product.image) }}" alt="{{ product.name }}"
+          class="product-detail-image" loading="lazy">
+      </div>
+
+      <div class="product-brand-badge">
+        <svg viewBox="0 0 120 120">
+          <defs>
+            <path id="badgeCircle" d="M60 60 m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0" />
+          </defs>
+          <text>
+            <textPath href="#badgeCircle">SHASTIKA GLOBAL • PREMIUM EXPORT GRADE • </textPath>
+          </text>
+        </svg>
+        <span>
+          <img src="{{ url_for('static', filename='images/logo.webp') }}" alt="Shastika Global Logo">
+        </span>
+      </div>
+    </div>
+
+    <div class="product-info-column">
+      <p class="product-kicker">{{ product.kicker }}</p>
+      <h1 class="product-display-title">
+        {{ product.title_top }}
+        <span>{{ product.title_accent }}</span>
+      </h1>
+      <p class="product-detail-copy">{{ product.description }}</p>
+
+      <div class="product-detail-grid">
+        {% for card in product.cards %}
+        <article class="product-detail-card">
+          <div class="product-card-heading">
+            <i class="{{ card['icon'] }}"></i>
+            <h2>{{ card['title'] }}</h2>
+          </div>
+          <ul>
+            {% for item in card['items'] %}
+            <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+      </div>
+
+      <div style="margin-top: 40px;">
+        <a href="/contact" class="submit-btn" style="min-width: 250px;">Enquire Now</a>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id="gallery" class="gallery-section inner-page-section">
+  <div class="section-header">
+    <h1 class="glass-heading">Photo Gallery</h1>
+  </div>
+
+  <div class="gallery-shell">
+    <button class="gallery-btn left" onclick="moveGallery(-1)">‹</button>
+    <div class="gallery-viewport">
+      <div class="gallery-slider" id="gallerySlider">
+        <img src="{{ url_for('static', filename='images/Photo_1.webp') }}" onclick="openGalleryModal(this)">
+        <img src="{{ url_for('static', filename='images/Photo_2.webp') }}" onclick="openGalleryModal(this)">
+        <img src="{{ url_for('static', filename='images/Photo_3.webp') }}" onclick="openGalleryModal(this)">
+        <img src="{{ url_for('static', filename='images/Photo_4.webp') }}" onclick="openGalleryModal(this)">
+        <img src="{{ url_for('static', filename='images/Photo_5.webp') }}" onclick="openGalleryModal(this)">
+        <img src="{{ url_for('static', filename='images/Photo_6.webp') }}" onclick="openGalleryModal(this)">
+      </div>
+    </div>
+    <button class="gallery-btn right" onclick="moveGallery(1)">›</button>
+  </div>
+</section>
+
+
+{% endblock %}

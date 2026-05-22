@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id="contact" class="contact-section inner-page-section">
+    <div class="contact-wrapper">
+        <h1 class="glass-heading">Contact Us - Australia</h1>
+        <p class="contact-subtitle">
+            Reach out now to place your paid trial order from our Australian office.
+        </p>
+
+        <form onsubmit="submitContactForm(event)">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" placeholder="Phone Number">
+            </div>
+
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" name="subject" placeholder="Enter subject">
+            </div>
+
+            <div class="form-group">
+                <label>Message</label>
+                <textarea name="message" placeholder="Write your message..."></textarea>
+            </div>
+
+            <button class="submit-btn">
+                Send Message
+            </button>
+        </form>
+    </div>
+
+    <div class="contact-details-block">
+        <div class="contact-details-grid">
+            <div class="detail-item">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                    <strong>Phone</strong>
+                    <p>+61 403898843</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <i class="fa-brands fa-whatsapp"></i>
+                <div>
+                    <strong>WhatsApp</strong>
+                    <p>+61 403898843</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <strong>Email</strong>
+                    <p>info@shastikaglobal.com.au</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <strong>Address</strong>
+                    <p>
+                        Byve Australia Pty Ltd<br>
+                        Trading as Shastika Global<br>
+                        12 Twickenham Close,<br>
+                        Normanhurst NSW 2076,<br>
+                        Australia
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="location-block">
+        <h2 class="glass-heading map-heading">Our Location – Australia</h2>
+        <a href="https://www.google.com/maps/place/12+Twickenham+Close,+Normanhurst+NSW+2076,+Australia"
+            target="_blank" class="map-link">
+            <div class="map-box">
+                <div class="map-overlay">
+                    <span><i class="fa-solid fa-map-location-dot"></i> Open in Google Maps</span>
+                </div>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3314.672!2d151.189!3d-33.7462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12a5d5d5d5d5d5%3A0x5d5d5d5d5d5d5d5d!2s12%20Twickenham%20Close%2C%20Normanhurst%20NSW%202076%2C%20Australia!5e0!3m2!1sen!2sau!4v1716259200000"
+                    loading="lazy" allowfullscreen="" allow="geolocation">
+                </iframe>
+            </div>
+        </a>
+    </div>
+</section>
+{% endblock %}

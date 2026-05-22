@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="team-section inner-page-section">
+  <h1 class="glass-heading">Our Team</h1>
+  <p class="subtitle">
+    "What we cannot achieve alone becomes possible when we stand as one"
+  </p>
+
+  <div class="team-container">
+    <div class="team-card">
+      <img src="{{ url_for('static', filename='images/ram.webp') }}" alt="Ragul" loading="lazy">
+      <h3>Mr. Ram Ragul</h3>
+      <span>CEO</span>
+    </div>
+
+    <div class="team-card">
+      <img src="{{ url_for('static', filename='images/gokul.webp') }}" alt="Gokul" loading="lazy">
+      <h3>Mr. Lakshmana Gokul</h3>
+      <span>DIRECTOR</span>
+    </div>
+  </div>
+</section>
+{% endblock %}

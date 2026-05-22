@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SMNJW03KGV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-SMNJW03KGV');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shastika Global</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ag_logo.png') }}">
+
+</head>
+
+<body class="{% if request.path.startswith('/product/') %}product-page{% endif %}">
+
+  <nav class="navbar">
+    <a href="/home" class="logo-container">
+      <img src="{{ url_for('static', filename='images/ag_logo.png') }}" alt="Shastika Global" loading="lazy">
+      <span>SHASTIKA GLOBAL</span>
+    </a>
+
+    <div class="menu-toggle" aria-label="Open Menu">☰</div>
+
+    <div class="nav-links">
+      <a href="/home">HOME</a>
+      <div class="nav-dropdown">
+        <a href="#" class="dropbtn">PRODUCTS ▾</a>
+        <div class="dropdown-menu">
+          <a href="/product/tendercoconut">Tender Coconut</a>
+          <a href="/product/greencoconut">Green Coconut</a>
+          <a href="/product/huskedcoconut">Husked Coconut</a>
+          <a href="/product/semihuskedcoconut">Semi-Husked Coconut</a>
+          <a href="/product/dehusked">Dehusked Coconut</a>
+          <a href="/product/freshorganic">Fresh Organic Coconut</a>
+          <a href="/product/tomato">Tomato</a>
+          <a href="/product/watermelon">Watermelon</a>
+          <a href="/product/blackwatermelon">Black Diamond Watermelon</a>
+          <a href="/product/yellowpumpkin">Yellow Pumpkin</a>
+          <a href="/product/whitepumpkin">White Pumpkin</a>
+          <a href="/product/yellowcucumber">Yellow Cucumber</a>
+          <a href="/product/banana">Cavendish Banana</a>
+          <a href="/product/babybanana">Baby Banana</a>
+          <a href="/product/nendranbanana">Nendran Banana</a>
+          <a href="/product/redbanana">Red Banana</a>
+        </div>
+      </div>
+      <a href="/countries">COUNTRIES</a>
+      <a href="/awards">AWARDS</a>
+      <a href="/team">OUR TEAM</a>
+      <a href="/contact">CONTACT US</a>
+      <a href="/gallery">GALLERY</a>
+      <a href="/australia">AUSTRALIA</a>
+    </div>
+  </nav>
+
+  {% block content %}{% endblock %}
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <h2 style="font-weight: 700; text-transform: uppercase;">Shastika Global Impex Private Limited</h2>
+        <h3
+          style="font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: -10px; margin-bottom: 20px;">
+          Import & Export of Agricultural Products</h3>
+        <p style="text-transform: uppercase; font-size: 13px; font-weight: 900; max-width: 800px; line-height: 1.8;">
+          Shastika Global Impex Private Limited is a trusted exporter and supplier of premium coconuts, including brown,
+          tender, and green varieties, responsibly sourced from reliable growers. Backed by a dynamic young team across
+          software, data analysis, and business development, we combine technology, insight, and market expertise to
+          deliver consistent quality and long-term global partnerships.
+        </p>
+      </div>
+      <div class="footer-right">
+        <h3 style="font-size: 16px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px;">Quick Links</h3>
+        <p style="text-transform: uppercase; margin-bottom: 8px;"><a href="/home">Home</a></p>
+        <p style="text-transform: uppercase; margin-bottom: 8px;"><a href="/home#why-us">About</a></p>
+        <p style="text-transform: uppercase; margin-bottom: 8px;"><a href="/home#products">Products</a></p>
+        <p style="text-transform: uppercase; margin-bottom: 8px;"><a href="/awards">Certifications</a></p>
+        <p style="text-transform: uppercase; margin-bottom: 8px;"><a href="/contact">Contact Us</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="font-size: 13px; text-transform: uppercase;">&copy; 2025 Shastika Global Impex Pvt. Ltd. All Rights
+        Reserved.</p>
+    </div>
+  </footer>
+
+
+  <!-- ================= IMAGE MODALS (MODERN LIGHTBOX) ================= -->
+
+  <!-- Cert/Awards Modal -->
+  <div id="certModal" onclick="closeCertModal()">
+    <div class="gallery-topbar">
+      <button id="certCloseBtn" class="gallery-back" type="button" title="Close Certificate"
+        onclick="event.stopPropagation(); closeCertModal()">
+        <span class="arrow">←</span>
+        <span>Back</span>
+      </button>
+    </div>
+    <button class="lightbox-nav prev" id="certPrevBtn" title="Previous Certificate"
+      onclick="event.stopPropagation(); navigateCert(-1)">Previous</button>
+    <img id="certModalImg" src="" alt="Certificate" onclick="event.stopPropagation()" />
+    <button class="lightbox-nav next" id="certNextBtn" title="Next Certificate"
+      onclick="event.stopPropagation(); navigateCert(1)">Next</button>
+  </div>
+
+  <!-- Gallery Modal -->
+  <div id="galleryModal" class="gallery-modal">
+    <div class="gallery-topbar">
+      <button class="gallery-back" onclick="closeGallery(event)">
+        <span class="arrow">←</span>
+        <span>Back</span>
+      </button>
+    </div>
+    <button class="lightbox-nav prev" id="galleryPrevBtn" title="Previous Image"
+      onclick="event.stopPropagation(); navigateGallery(-1)">Previous</button>
+    <img id="galleryModalImg" onclick="event.stopPropagation()">
+    <button class="lightbox-nav next" id="galleryNextBtn" title="Next Image"
+      onclick="event.stopPropagation(); navigateGallery(1)">Next</button>
+  </div>
+
+  <!-- ================= SHASTIKA WIDGETS ================= -->
+
+  <!-- WHATSAPP ICON -->
+  <a href="https://wa.me/917397612015" target="_blank" id="whatsapp-icon" title="Chat on WhatsApp"
+    aria-label="Chat on WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
+      style="width:32px;height:32px;">
+  </a>
+
+  <!-- MESSAGE ICON -->
+  <button id="cocobot-icon" type="button" title="Chat with CocoBot" aria-label="Chat with CocoBot">
+    💬
+  </button>
+
+  <!-- CHAT WINDOW -->
+  <div id="cocobot-box" style="display: none;">
+    <button id="cocobot-close" aria-label="Close chatbot">✕</button>
+    <iframe src="https://chatbot-e99e.onrender.com" style="width:100%; height:100%; border:none;">
+    </iframe>
+  </div>
+
+
+  <style>
+    /* WHATSAPP ICON */
+
+    #whatsapp-icon {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      text-decoration: none;
+      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    #whatsapp-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+    }
+
+    /* CHAT ICON */
+
+    #cocobot-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: black;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      z-index: 9999;
+      outline: none;
+      border: none;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    #cocobot-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    #cocobot-icon:focus,
+    #cocobot-icon:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.3);
+      outline-offset: 2px;
+    }
+
+    #cocobot-icon:active {
+      background: rgba(0, 0, 0, 0.9);
+      transform: scale(0.95);
+    }
+
+    /* CHAT WINDOW */
+
+    #cocobot-box {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 340px;
+      height: 460px;
+      background: rgba(137, 151, 94, 0.17);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      display: none;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    /* CLOSE BUTTON (top-right inside chat box) */
+    #cocobot-close {
+      position: absolute;
+      top: 10px !important;
+      right: 14px !important;
+      width: 32px !important;
+      height: 32px !important;
+      border: none !important;
+      border-radius: 50% !important;
+      background: rgba(0, 0, 0, 0.8) !important;
+      color: #fff !important;
+      font-size: 18px !important;
+      line-height: 1 !important;
+      cursor: pointer !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 10002 !important;
+      pointer-events: auto !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      outline: none !important;
+    }
+
+    #cocobot-close:hover {
+      background: rgba(0, 0, 0, 0.95) !important;
+      transform: scale(1.1) !important;
+    }
+
+    #cocobot-close:active {
+      transform: scale(0.95) !important;
+    }
+  </style>
+
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+      // Mobile menu toggle
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener("click", function () {
+          navLinks.classList.toggle("active");
+        });
+      }
+
+      // Chatbot toggle functionality
+      const cocobotIcon = document.getElementById("cocobot-icon");
+      const cocobotBox = document.getElementById("cocobot-box");
+      const cocobotClose = document.getElementById("cocobot-close");
+
+      if (cocobotIcon && cocobotBox) {
+        cocobotIcon.addEventListener("click", function (e) {
+          e.preventDefault();
+          cocobotBox.style.display = cocobotBox.style.display === "none" ? "block" : "none";
+        });
+      }
+
+      if (cocobotClose && cocobotBox) {
+        cocobotClose.addEventListener("click", function () {
+          cocobotBox.style.display = "none";
+        });
+      }
+
+    });
+
+  </script>
+
+  <!-- Main JavaScript -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

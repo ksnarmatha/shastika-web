@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id="contact" class="contact-section inner-page-section">
+    <div class="contact-wrapper">
+        <h1 class="glass-heading">Contact Us</h1>
+        <p class="contact-subtitle">
+            Reach out now to place your paid trial order.
+        </p>
+
+        <form onsubmit="submitContactForm(event)">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" placeholder="Phone Number">
+            </div>
+
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" name="subject" placeholder="Enter subject">
+            </div>
+
+            <div class="form-group">
+                <label>Message</label>
+                <textarea name="message" placeholder="Write your message..."></textarea>
+            </div>
+
+            <button class="submit-btn">
+                Send Message
+            </button>
+        </form>
+    </div>
+
+    <div class="contact-details-block">
+        <div class="contact-details-grid">
+            <div class="detail-item">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                    <strong>Phone</strong>
+                    <p>+91 7397612015 / 9629090961</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <i class="fa-brands fa-whatsapp"></i>
+                <div>
+                    <strong>WhatsApp</strong>
+                    <p>+91-7397612015</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <strong>Email</strong>
+                    <p>export@shastikaglobalimpex.co.in</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <strong>Address</strong>
+                    <p>
+                        NO 41/1, S 1-5, SATHY ATHANI MAIN ROAD,<br>
+                        THUCKANAYAKANPALAYAM,<br>
+                        ERODE, TAMIL NADU - 638315, INDIA
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="location-block">
+        <h2 class="glass-heading map-heading">Our Location</h2>
+        <a href="https://www.google.com/maps/place/Shastika+Global+Impex+Pvt+Ltd/@11.5066522,77.3874668,20.66z/data=!4m6!3m5!1s0x3ba9234e513d9023:0x3ec16edf849a50c3!8m2!3d11.5065764!4d77.3875631!16s%2Fg%2F11zj0hjnyj"
+            target="_blank" class="map-link">
+            <div class="map-box">
+                <div class="map-overlay">
+                    <span><i class="fa-solid fa-map-location-dot"></i> Open in Google Maps</span>
+                </div>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.508!2d77.545!3d11.3595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba9622d7b6b6b6b%3A0xa1a1a1a1a1a1a1a1!2s41%2F2%2C%20ST-5%2C%20Sathy%20Athani%20Main%20Rd%2C%20Thuckanaickenpalayam%2C%20Tamil%20Nadu%20638506!5e0!3m2!1sen!2sin!4v1711270800000"
+                    loading="lazy" allowfullscreen="" allow="geolocation">
+                </iframe>
+            </div>
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id="awards" class="cert-section inner-page-section">
+    <div class="section-header">
+        <h1 class="glass-heading">Certifications & Awards</h1>
+    </div>
+
+    <div class="cert-shell">
+        <button class="cert-side-btn left" onclick="moveCert(-1)">‹</button>
+        <div class="slider-wrap">
+            <div class="slider" id="certSlider">
+                <div class="cert-grid-box">
+                    <div class="cert-card" onclick="openCertModal(this)">
+                        <img src="{{ url_for('static', filename='images/certificate1.webp') }}" loading="lazy">
+                    </div>
+                    <div class="cert-card" onclick="openCertModal(this)">
+                        <img src="{{ url_for('static', filename='images/certificate2.webp') }}" loading="lazy">
+                    </div>
+                    <div class="cert-card" onclick="openCertModal(this)">
+                        <img src="{{ url_for('static', filename='images/certificate3.webp') }}" loading="lazy">
+                    </div>
+                    <div class="cert-card" onclick="openCertModal(this)">
+                        <img src="{{ url_for('static', filename='images/certificate4.webp') }}" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="cert-side-btn right" onclick="moveCert(1)">›</button>
+    </div>
+</section>
+
+
+{% endblock %}

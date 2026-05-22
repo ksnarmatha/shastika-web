@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shastika Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
+body{background:#0c0f17;color:#fff;display:flex;height:100vh}
+
+/* LOGIN */
+#loginScreen{
+  position:fixed;inset:0;background:#000;
+  display:flex;align-items:center;justify-content:center;z-index:1000
+}
+.login-box{
+  background:#111;padding:40px;border-radius:18px;width:360px
+}
+.login-box h2{text-align:center;margin-bottom:20px}
+.login-box input{
+  width:100%;padding:12px;margin-bottom:14px;border-radius:10px;border:none
+}
+.login-box button{
+  width:100%;padding:12px;background:#39ff9f;border:none;font-weight:600
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:250px;background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(14px);padding:30px
+}
+.sidebar h2{text-align:center;margin-bottom:40px}
+.sidebar a{
+  display:block;padding:14px;border-radius:12px;
+  margin-bottom:12px;color:#fff;text-decoration:none;cursor:pointer
+}
+.sidebar a.active,.sidebar a:hover{background:#39ff9f;color:#000;font-weight:600}
+
+/* MAIN */
+.main{flex:1;padding:40px;overflow:auto}
+.section{display:none}
+.section.active{display:block}
+
+/* DASHBOARD */
+.cards{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:24px;margin-bottom:40px
+}
+.card{
+  background:rgba(255,255,255,0.1);
+  padding:30px;border-radius:20px
+}
+.card h3{color:#39ff9f}
+.card span{font-size:32px;font-weight:700}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin-top:20px}
+th,td{padding:14px;border-bottom:1px solid rgba(255,255,255,0.2)}
+th{color:#39ff9f;text-align:left}
+
+/* BUTTON */
+button{padding:8px 14px;border:none;border-radius:8px;cursor:pointer}
+.del{background:#ff5c5c;color:#fff}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h2>Admin Login</h2>
+    <input id="email" placeholder="Email">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>SHASTIKA</h2>
+  <a onclick="show('dashboard',this)" class="active">Dashboard</a>
+  <a onclick="show('messages',this)">Contact Messages</a>
+  <a onclick="show('enquiries',this)">Product Enquiries</a>
+  <hr style="margin:30px 0;opacity:.2">
+  <a onclick="logout()" style="background:#ff5c5c;color:#fff;font-weight:600">Sign Out</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="section active">
+  <h1>Dashboard</h1>
+  <div class="cards">
+    <div class="card"><h3>Messages</h3><span id="mCount">0</span></div>
+    <div class="card"><h3>Enquiries</h3><span id="eCount">0</span></div>
+  </div>
+</div>
+
+<!-- CONTACT MESSAGES -->
+<div id="messages" class="section">
+  <h1>Contact Messages</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th><th>Email</th><th>Phone</th>
+        <th>Subject</th><th>Message</th><th></th>
+      </tr>
+    </thead>
+    <tbody id="msgTable"></tbody>
+  </table>
+</div>
+
+<!-- PRODUCT ENQUIRIES -->
+<div id="enquiries" class="section">
+  <h1>Product Enquiries</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th><th>Name</th><th>Country</th>
+        <th>Phone</th><th>Email</th><th></th>
+      </tr>
+    </thead>
+    <tbody id="enqTable"></tbody>
+  </table>
+</div>
+
+</div>
+<script>
+/* ===== AUTH CHECK ===== */
+fetch("/admin/messages")
+.then(res=>{
+  if(res.status==401){
+    loginScreen.style.display="flex";
+  } else {
+    loginScreen.style.display="none";
+    loadMessages();
+    loadEnquiries();
+  }
+});
+
+/* ===== LOGIN ===== */
+function login(){
+ fetch("/admin_login",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body: JSON.stringify({
+     email: email.value,
+     password: pass.value
+   })
+ })
+ .then(res=>res.json())
+ .then(data=>{
+   if(data.status=="ok"){
+     location.reload();
+   } else {
+     alert("Invalid Login");
+   }
+ });
+}
+
+/* ===== LOGOUT ===== */
+function logout(){
+ location.href="/admin_logout";
+}
+
+/* ===== NAV ===== */
+function show(id,el){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".sidebar a").forEach(a=>a.classList.remove("active"));
+  el.classList.add("active");
+}
+
+/* ===== LOAD MESSAGES ===== */
+function loadMessages(){
+ fetch("/admin/messages")
+ .then(res=>res.json())
+ .then(messages=>{
+   msgTable.innerHTML="";
+   messages.forEach(m=>{
+     msgTable.innerHTML+=`
+      <tr>
+        <td>${m.name}</td>
+        <td>${m.email}</td>
+        <td>${m.phone}</td>
+        <td>${m.subject}</td>
+        <td>${m.message}</td>
+        <td></td>
+      </tr>`;
+   });
+   mCount.innerText = messages.length;
+ });
+}
+
+/* ===== LOAD ENQUIRIES ===== */
+function loadEnquiries(){
+ fetch("/admin/enquiries")
+ .then(res=>res.json())
+ .then(enquiries=>{
+   enqTable.innerHTML="";
+   enquiries.forEach(e=>{
+     enqTable.innerHTML+=`
+      <tr>
+        <td>${e.product}</td>
+        <td>${e.name}</td>
+        <td>${e.country}</td>
+        <td>${e.phone}</td>
+        <td>${e.email}</td>
+        <td></td>
+      </tr>`;
+   });
+   eCount.innerText = enquiries.length;
+ });
+}
+</script>
+</body>
+</html>
