@@ -42,43 +42,7 @@ body.product-page {
   padding-top: 0;
 }
 
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.38;
-  filter: blur(0.1px);
-}
 
-body::before {
-  width: 270px;
-  height: 390px;
-  left: -90px;
-  bottom: -70px;
-  background:
-    radial-gradient(ellipse at 64% 18%, rgba(96, 119, 42, 0.38) 0 9%, transparent 10%),
-    radial-gradient(ellipse at 46% 28%, rgba(96, 119, 42, 0.33) 0 8%, transparent 9%),
-    radial-gradient(ellipse at 68% 43%, rgba(96, 119, 42, 0.3) 0 8%, transparent 9%),
-    radial-gradient(ellipse at 43% 56%, rgba(96, 119, 42, 0.27) 0 8%, transparent 9%),
-    linear-gradient(65deg, transparent 48%, rgba(96, 119, 42, 0.35) 49% 51%, transparent 52%);
-  transform: rotate(-16deg);
-}
-
-body::after {
-  width: 300px;
-  height: 420px;
-  right: -100px;
-  top: 170px;
-  background:
-    radial-gradient(ellipse at 38% 18%, rgba(96, 119, 42, 0.3) 0 8%, transparent 9%),
-    radial-gradient(ellipse at 57% 30%, rgba(96, 119, 42, 0.26) 0 8%, transparent 9%),
-    radial-gradient(ellipse at 35% 44%, rgba(96, 119, 42, 0.24) 0 8%, transparent 9%),
-    radial-gradient(ellipse at 60% 57%, rgba(96, 119, 42, 0.21) 0 8%, transparent 9%),
-    linear-gradient(112deg, transparent 48%, rgba(96, 119, 42, 0.26) 49% 51%, transparent 52%);
-  transform: rotate(18deg);
-}
 
 a {
   color: inherit;
